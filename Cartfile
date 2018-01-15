@@ -1,5 +1,3 @@
 github "danielbyon/ParseKit"
-github "Quick/Quick"
-github "Quick/Nimble"
 github "ReactiveKit/ReactiveKit"
 
