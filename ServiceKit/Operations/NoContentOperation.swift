@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class NoContentOperation<T: NetworkRequest>: NetworkOperation<T> where T.Result == Void {
+public class NoContentOperation<T: NetworkRequest>: NetworkOperation<T> where T.ResultType == Void {
 
     private var dataTask: URLSessionDataTask?
 

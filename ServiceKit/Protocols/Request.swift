@@ -10,7 +10,7 @@ import Foundation
 
 public protocol Request: Equatable {
 
-    associatedtype Result
+    associatedtype ResultType
 
     var identifier: String { get }
 

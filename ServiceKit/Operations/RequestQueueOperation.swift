@@ -10,7 +10,7 @@ import Foundation
 
 public class RequestQueueOperation<T: Request>: ConcurrentOperation {
 
-    public internal(set) var result: Result<T.Result>? {
+    public internal(set) var result: Result<T.ResultType>? {
         didSet {
             state = .finished
         }

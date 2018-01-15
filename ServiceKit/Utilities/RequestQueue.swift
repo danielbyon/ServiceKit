@@ -14,13 +14,13 @@ public protocol RequestQueueProtocol {
     var currentlyExecuting: Property<Bool> { get }
     
     @discardableResult
-    func performRequest<T: NetworkRequest>(_ request: T, completion: ((Result<T.Result>) -> Void)?) -> Operation where T.Result == Void
+    func performRequest<T: NetworkRequest>(_ request: T, completion: ((Result<T.ResultType>) -> Void)?) -> Operation where T.ResultType == Void
 
     @discardableResult
-    func performRequest<T: DataRequest>(_ request: T, completion: ((Result<T.Result>) -> Void)?) -> Operation
+    func performRequest<T: DataRequest>(_ request: T, completion: ((Result<T.ResultType>) -> Void)?) -> Operation
 
     @discardableResult
-    func performRequest<T: ParsableRequest>(_ request: T, completion: ((Result<T.Result>) -> Void)?) -> Operation
+    func performRequest<T: ParsableRequest>(_ request: T, completion: ((Result<T.ResultType>) -> Void)?) -> Operation
 
     func requestCurrentlyExecuting<T: Request>(_ request: T) -> Operation?
 
@@ -61,7 +61,7 @@ public class RequestQueue: RequestQueueProtocol {
     // MARK: Public Methods
 
     @discardableResult
-    public func performRequest<T: NetworkRequest>(_ request: T, completion: ((Result<T.Result>) -> Void)?) -> Operation where T.Result == Void {
+    public func performRequest<T: NetworkRequest>(_ request: T, completion: ((Result<T.ResultType>) -> Void)?) -> Operation where T.ResultType == Void {
         if request.shouldCoalesceMultipleCompletions,
             let existingOperation = checkForExistingOperation(request, completion: completion) {
             return existingOperation
@@ -73,7 +73,7 @@ public class RequestQueue: RequestQueueProtocol {
     }
 
     @discardableResult
-    public func performRequest<T: DataRequest>(_ request: T, completion: ((Result<T.Result>) -> Void)?) -> Operation {
+    public func performRequest<T: DataRequest>(_ request: T, completion: ((Result<T.ResultType>) -> Void)?) -> Operation {
         if request.shouldCoalesceMultipleCompletions,
             let existingOperation = checkForExistingOperation(request, completion: completion) {
             return existingOperation
@@ -85,7 +85,7 @@ public class RequestQueue: RequestQueueProtocol {
     }
 
     @discardableResult
-    public func performRequest<T: ParsableRequest>(_ request: T, completion: ((Result<T.Result>) -> Void)?) -> Operation {
+    public func performRequest<T: ParsableRequest>(_ request: T, completion: ((Result<T.ResultType>) -> Void)?) -> Operation {
         if request.shouldCoalesceMultipleCompletions,
             let existingOperation = checkForExistingOperation(request, completion: completion) {
             return existingOperation
@@ -103,7 +103,7 @@ public class RequestQueue: RequestQueueProtocol {
 
     // MARK: Private Methods
 
-    private func checkForExistingOperation<T: Request>(_ request: T, completion: ((Result<T.Result>) -> Void)?) -> Operation? {
+    private func checkForExistingOperation<T: Request>(_ request: T, completion: ((Result<T.ResultType>) -> Void)?) -> Operation? {
         let callbackIdentifier = request.identifier
         var existingOperation: Operation?
         callbackManipulationQueue.sync {
@@ -118,12 +118,12 @@ public class RequestQueue: RequestQueueProtocol {
 
                 // Then call the new completion
                 switch result {
-                case .success(let value as T.Result):
+                case .success(let value as T.ResultType):
                     completion?(.success(value))
                 case .failure(let error):
                     completion?(.failure(error))
                 case .success(let value):
-                    completion?(.failure(RequestQueueError.identifierMismatch(identifier: callbackIdentifier, expectedType: T.Result.self, actualType: type(of: value))))
+                    completion?(.failure(RequestQueueError.identifierMismatch(identifier: callbackIdentifier, expectedType: T.ResultType.self, actualType: type(of: value))))
                 }
             }
             self.callbacks[callbackIdentifier] = rewrappedCompletion
@@ -132,7 +132,7 @@ public class RequestQueue: RequestQueueProtocol {
         return existingOperation
     }
 
-    private func addOperation<T>(_ operation: RequestQueueOperation<T>, completion: ((Result<T.Result>) -> Void)?) {
+    private func addOperation<T>(_ operation: RequestQueueOperation<T>, completion: ((Result<T.ResultType>) -> Void)?) {
         callbackManipulationQueue.sync {
             operation.completionBlock = { [weak self, weak operation] in
                 guard let strongSelf = self,
@@ -163,12 +163,12 @@ public class RequestQueue: RequestQueueProtocol {
             let callbackIdentifier = operation.request.identifier
             let wrappedCompletion: CallbackWrapperBlock = { result in
                 switch result {
-                case .success(let value as T.Result):
+                case .success(let value as T.ResultType):
                     completion?(.success(value))
                 case .failure(let error):
                     completion?(.failure(error))
                 case .success(let value):
-                    completion?(.failure(RequestQueueError.identifierMismatch(identifier: callbackIdentifier, expectedType: T.Result.self, actualType: type(of: value))))
+                    completion?(.failure(RequestQueueError.identifierMismatch(identifier: callbackIdentifier, expectedType: T.ResultType.self, actualType: type(of: value))))
                 }
             }
             self.callbacks[callbackIdentifier] = wrappedCompletion

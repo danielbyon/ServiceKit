@@ -10,6 +10,6 @@ import Foundation
 
 public protocol DataRequest: NetworkRequest {
 
-    func processData(_ data: Data) throws -> Result
+    func processData(_ data: Data) throws -> ResultType
 
 }
