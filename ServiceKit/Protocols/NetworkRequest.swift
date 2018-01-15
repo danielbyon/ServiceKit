@@ -16,9 +16,9 @@ public protocol NetworkRequest: Request {
 
 }
 
-extension NetworkRequest {
+public extension NetworkRequest {
 
-    var validHTTPStatusCodes: [Int] {
+    public var validHTTPStatusCodes: [Int] {
         return Array(200..<300)
     }
 
