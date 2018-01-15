@@ -25,6 +25,11 @@ public class NoContentOperation<T: NetworkRequest>: NetworkOperation<T> where T.
                         return
                     }
 
+                    if let error = error {
+                        self.result = .failure(error)
+                        return
+                    }
+
                     self.result = .success(())
                 }
             case .failure(let error):

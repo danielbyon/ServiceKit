@@ -25,8 +25,13 @@ public class JSONOperation<T: ParsableRequest>: NetworkOperation<T> {
                         return
                     }
 
+                    if let error = error {
+                        self.result = .failure(error)
+                        return
+                    }
+
                     if let response = response as? HTTPURLResponse {
-                        guard !self.request.validHTTPStatusCodes.contains(response.statusCode) else {
+                        guard self.request.validHTTPStatusCodes.contains(response.statusCode) else {
                             self.result = .failure(RequestQueueError.invalidStatusCode(statusCode: response.statusCode))
                             return
                         }
