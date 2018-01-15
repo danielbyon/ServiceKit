@@ -69,7 +69,7 @@ public struct URLRequestBuilder {
                                    headerFields: [String: String]? = nil,
                                    transformers: [URLRequestTransforming]? = nil,
                                    completion: @escaping URLRequestBuilderCompletion) {
-        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             completion(.failure(RequestQueueError.failedToCreateRequest))
             return
         }
