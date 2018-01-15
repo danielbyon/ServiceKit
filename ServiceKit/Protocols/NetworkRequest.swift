@@ -10,7 +10,7 @@ import Foundation
 
 public protocol NetworkRequest: Request {
 
-    func makeURLRequest(completion: URLRequestBuilderCompletion)
+    func makeURLRequest(completion: @escaping URLRequestBuilderCompletion)
 
     var validHTTPStatusCodes: [Int] { get }
 
