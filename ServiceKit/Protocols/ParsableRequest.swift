@@ -9,7 +9,7 @@
 import Foundation
 import ParseKit
 
-public protocol ParsableRequest: NetworkRequest where ResultType: Parsable {
+public protocol ParsableRequest: NetworkRequest {
 
     func parseJSON(_ json: NSDictionary) throws -> ResultType
 
