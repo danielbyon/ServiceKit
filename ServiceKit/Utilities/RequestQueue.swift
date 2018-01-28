@@ -22,6 +22,9 @@ public protocol RequestQueueProtocol {
     @discardableResult
     func performRequest<T: ParsableRequest>(_ request: T, completion: ((Result<T.ResultType>) -> Void)?) -> Operation
 
+    @discardableResult
+    func performRequest<T: ParsableArrayRequest>(_ request: T, completion: ((Result<T.ResultType>) -> Void)?) -> Operation
+
     func requestCurrentlyExecuting<T: Request>(_ request: T) -> Operation?
 
 }
@@ -92,6 +95,18 @@ public class RequestQueue: RequestQueueProtocol {
         }
 
         let operation = JSONOperation(request: request, session: session)
+        addOperation(operation, completion: completion)
+        return operation
+    }
+
+    @discardableResult
+    public func performRequest<T: ParsableArrayRequest>(_ request: T, completion: ((Result<T.ResultType>) -> Void)?) -> Operation {
+        if request.shouldCoalesceMultipleCompletions,
+            let existingOperation = checkForExistingOperation(request, completion: completion) {
+            return existingOperation
+        }
+
+        let operation = JSONArrayOperation(request: request, session: session)
         addOperation(operation, completion: completion)
         return operation
     }

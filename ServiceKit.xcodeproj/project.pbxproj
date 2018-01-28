@@ -44,6 +44,10 @@
 		65A0EBE1200AED7E006DC545 /* URLRequestTransforming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651094911FF49987005DBBF6 /* URLRequestTransforming.swift */; };
 		65A0EBE6200AEE66006DC545 /* ParseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A0EBD8200AED3E006DC545 /* ParseKit.framework */; };
 		65A0EBE7200AEE66006DC545 /* ReactiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A0EBD3200AED3A006DC545 /* ReactiveKit.framework */; };
+		65E47CE2201DAF8300303F1D /* JSONArrayOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47CE1201DAF8300303F1D /* JSONArrayOperation.swift */; };
+		65E47CE3201DAF8300303F1D /* JSONArrayOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47CE1201DAF8300303F1D /* JSONArrayOperation.swift */; };
+		65E47CE5201DAFB900303F1D /* ParsableArrayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47CE4201DAFB900303F1D /* ParsableArrayRequest.swift */; };
+		65E47CE6201DAFB900303F1D /* ParsableArrayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E47CE4201DAFB900303F1D /* ParsableArrayRequest.swift */; };
 		65EF88AF1FF47C5700F421DB /* ServiceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EF88A51FF47C5700F421DB /* ServiceKit.framework */; };
 		65EF88B41FF47C5700F421DB /* ServiceKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF88B31FF47C5700F421DB /* ServiceKitTests.swift */; };
 		65EF88CD1FF47CE600F421DB /* ServiceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EF88C41FF47CE500F421DB /* ServiceKit.framework */; };
@@ -95,6 +99,8 @@
 		65A0EBD3200AED3A006DC545 /* ReactiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveKit.framework; path = Carthage/Build/tvOS/ReactiveKit.framework; sourceTree = "<group>"; };
 		65A0EBD4200AED3A006DC545 /* Bond.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bond.framework; path = Carthage/Build/tvOS/Bond.framework; sourceTree = "<group>"; };
 		65A0EBD8200AED3E006DC545 /* ParseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseKit.framework; path = Carthage/Build/tvOS/ParseKit.framework; sourceTree = "<group>"; };
+		65E47CE1201DAF8300303F1D /* JSONArrayOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONArrayOperation.swift; sourceTree = "<group>"; };
+		65E47CE4201DAFB900303F1D /* ParsableArrayRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsableArrayRequest.swift; sourceTree = "<group>"; };
 		65EF88A51FF47C5700F421DB /* ServiceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ServiceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65EF88A91FF47C5700F421DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65EF88AE1FF47C5700F421DB /* ServiceKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ServiceKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -237,6 +243,7 @@
 				651094871FF4958B005DBBF6 /* ParsableRequest.swift */,
 				65EF88E21FF47EDA00F421DB /* Request.swift */,
 				651094911FF49987005DBBF6 /* URLRequestTransforming.swift */,
+				65E47CE4201DAFB900303F1D /* ParsableArrayRequest.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -255,6 +262,7 @@
 				65A0EBB12008ADAD006DC545 /* ConcurrentOperation.swift */,
 				65A0EBC02008B790006DC545 /* DataOperation.swift */,
 				65A0EBBA2008B440006DC545 /* JSONOperation.swift */,
+				65E47CE1201DAF8300303F1D /* JSONArrayOperation.swift */,
 				65A0EBB72008B34C006DC545 /* NetworkOperation.swift */,
 				65A0EBC32008B999006DC545 /* NoContentOperation.swift */,
 				65A0EBB42008B308006DC545 /* RequestQueueOperation.swift */,
@@ -490,6 +498,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65E47CE2201DAF8300303F1D /* JSONArrayOperation.swift in Sources */,
+				65E47CE5201DAFB900303F1D /* ParsableArrayRequest.swift in Sources */,
 				65A0EBB22008ADAD006DC545 /* ConcurrentOperation.swift in Sources */,
 				65A0EBC12008B790006DC545 /* DataOperation.swift in Sources */,
 				6510948A1FF497E7005DBBF6 /* DataRequest.swift in Sources */,
@@ -521,6 +531,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65E47CE3201DAF8300303F1D /* JSONArrayOperation.swift in Sources */,
+				65E47CE6201DAFB900303F1D /* ParsableArrayRequest.swift in Sources */,
 				65A0EBB32008ADAD006DC545 /* ConcurrentOperation.swift in Sources */,
 				65A0EBC22008B790006DC545 /* DataOperation.swift in Sources */,
 				65A0EBDF200AED7E006DC545 /* DataRequest.swift in Sources */,
